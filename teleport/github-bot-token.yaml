@@ -1,0 +1,11 @@
+kind: token
+version: v2
+metadata:
+  name: colormatic-deployer
+spec:
+  roles: [Bot]
+  join_method: github
+  bot_name: colormatic-deployer
+  github:
+    allow:
+      - repository: strideynet/machineid-github-kubernetes-webinar

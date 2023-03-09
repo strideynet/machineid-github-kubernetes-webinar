@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: colormatic
+  namespace: colormatic
+spec:
+  ports:
+    - name: 9090-tcp
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+  selector:
+    app.kubernetes.io/name: colormatic
+  type: LoadBalancer
