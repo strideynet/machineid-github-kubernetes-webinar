@@ -1,7 +1,9 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 )
@@ -12,21 +14,41 @@ func main() {
 	}
 }
 
+//go:embed index.html
+var indexTemplate string
+
 func run() error {
+	tmpl, err := template.New("index").Parse(indexTemplate)
+	if err != nil {
+		return fmt.Errorf("failed to parse template: %w", err)
+	}
+
 	addr := "0.0.0.0:9090"
 	srv := &http.Server{
 		Addr:    addr,
-		Handler: http.HandlerFunc(reqHandler),
+		Handler: reqHandler(tmpl),
 	}
 
 	log.Println("Listening on: ", addr)
 	return srv.ListenAndServe()
 }
 
-func reqHandler(w http.ResponseWriter, r *http.Request) {
-	body := fmt.Sprintf(`Welcome to COLORMATIC`)
-	_, err := w.Write([]byte(body))
-	if err != nil {
-		log.Println("Failed to write response: ", err)
+const (
+	colorBlue  = "SkyBlue"
+	colorGreen = "LightGreen"
+	colorPink  = "LightPink"
+
+	// Change me ! Commit, push, and see the magic happen!
+	configuredColor = colorGreen
+)
+
+func reqHandler(tmpl *template.Template) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		err := tmpl.Execute(w, map[string]any{
+			"color": configuredColor,
+		})
+		if err != nil {
+			log.Println("Failed to write response: ", err)
+		}
 	}
 }
