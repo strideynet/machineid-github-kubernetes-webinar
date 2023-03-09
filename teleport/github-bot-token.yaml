@@ -9,3 +9,4 @@ spec:
   github:
     allow:
       - repository: strideynet/machineid-github-kubernetes-webinar
+        environment: production

@@ -30,6 +30,8 @@ jobs:
   deploy-to-kubernetes:
     name: Deploy Kubernetes manifests using Teleport and Kubectl
     runs-on: ubuntu-latest
+    needs: build-and-push-docker
+    environment: production
     permissions:
       id-token: write
       contents: read
