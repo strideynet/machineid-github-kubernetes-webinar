@@ -18,7 +18,7 @@ spec:
       app.kubernetes.io/name: colormatic
     spec:
       containers:
-        - image: colormatic
+        - image: ghcr.io/strideynet/machineid-github-kubernetes-webinar/colormatic:latest
           name: colormatic
           ports:
             - containerPort: 9090

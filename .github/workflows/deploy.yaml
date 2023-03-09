@@ -59,7 +59,10 @@ jobs:
           # See https://goteleport.com/docs/machine-id/reference/telemetry/ for
           # more information.
           anonymous-telemetry: 1
-      - name: Patch manifests
-        run: echo foo # TODO: Insert image tag
-      - name: Apply manifests
-        run: kubectl get pods # TODO: Apply them
+      - uses: azure/k8s-deploy@v4
+        with:
+          namespace: 'colormatic'
+          manifests: |
+            kubernetes/deployment.yaml
+            kubernetes/service.yaml
+          images: 'ghcr.io/strideynet/machineid-github-kubernetes-webinar/colormatic:${{ github.sha }}'
