@@ -36,6 +36,7 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - uses: actions/checkout@v3
       - name: Install Kubectl
         uses: azure/setup-kubectl@v3
       - name: Install Teleport
