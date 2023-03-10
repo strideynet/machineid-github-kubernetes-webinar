@@ -6,6 +6,10 @@ Pre-reqs:
 - Kubernetes cluster connected to Teleport cluster
 
 Steps:
+- Fork this repo, and replace:
+  - `strideynet/machineid-github-kubernetes-webinar` with your own GitHub repo
+  - `docker-desktop` with the name of your Kubernetes cluster
+  - `root.tele.ottr.sh:443` with the address of your proxy
 - `tctl create -f teleport/role.yaml`
 - `tctl create -f teleport/github-bot-token.yaml`
 - `tctl bots add bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer`

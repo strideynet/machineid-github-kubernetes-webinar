@@ -24,4 +24,9 @@ spec:
             - containerPort: 9090
               protocol: TCP
           resources: {}
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
       restartPolicy: Always
