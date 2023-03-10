@@ -39,7 +39,7 @@ const (
 	colorPink  = "LightPink"
 
 	// Change me ! Commit, push, and see the magic happen!
-	configuredColor = colorGreen
+	configuredColor = colorPink
 )
 
 func reqHandler(tmpl *template.Template) http.HandlerFunc {
