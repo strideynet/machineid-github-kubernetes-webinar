@@ -1,28 +1,39 @@
 # machineid-github-kubernetes-webinar
 
-The accompanying demo repository for 
-https://teleport.registration.goldcast.io/events/cc92262f-da46-44c3-9c3a-c6278f40a043
+The accompanying demo repository for the [Machine ID GitHub and Kubernetes
+Webinar](https://teleport.registration.goldcast.io/events/cc92262f-da46-44c3-9c3a-c6278f40a043).
 
-This README will be expanded.
+The demo shows a simple Go application that uses GitHub Actions and Teleport to
+build a docker image and deploy this to a Kubernetes cluster securely and
+without the use of secrets.
 
-Pre-reqs:
-- Kubernetes cluster connected to Teleport cluster
+Pre-requisites:
+- Kubernetes cluster connected to Teleport cluster.
+- Your cluster should support LoadBalancer type services (this is for the demo
+  to be internet accessible - you can omit this).
 
 Steps:
-- Fork this repo, and replace:
-  - `strideynet/machineid-github-kubernetes-webinar` with your own GitHub repo
-  - `docker-desktop` with the name of your Kubernetes cluster
-  - `root.tele.ottr.sh:443` with the address of your proxy
-- `tctl create -f teleport/role.yaml`
-- `tctl create -f teleport/github-bot-token.yaml`
-- `tctl bots add bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer`
-- `kubectl apply` `kubernetes/00-namespace.yaml`, `kubernetes/01-role.yaml`, `kubernetes/02-rolebinding.yaml`
+- Fork this repo and replace:
+  - `strideynet/machineid-github-kubernetes-webinar` with your own GitHub repo's path.
+  - `docker-desktop` with the name of your Kubernetes cluster as configured in Teleport.
+  - `root.tele.ottr.sh:443` with the publicly accessible address of your proxy.
+- `tctl create -f teleport/role.yaml` - creates the role your bot will use.
+- `tctl create -f teleport/github-bot-token.yaml` - defines the rules for which GitHub Action will be able to access the bot you create in the next step.
+- `tctl bots add bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer` - creates the Bot user that your GitHub Actions will authenticate as when connecting to Teleport.
+- `kubectl apply` `kubernetes/00-namespace.yaml`, `kubernetes/01-role.yaml`, `kubernetes/02-rolebinding.yaml` - create roles and role bindings in Kubernetes to assign that bot permissions to deploy to your cluster.
 - Your Teleport and Kubernetes cluster now have the correct RBAC to allow your GitHub repo to deploy to the Kubernetes cluster through Teleport.
-- Trigger CI with color change.
+- Commit and push a change to `main.go` to trigger the CI.
 - Check to see service deployed.
 - Take a peek at your Teleport audit log.
 
 ## Highlights
+
+### No long-lived secrets
+
+Unlike some traditional methods of configuring GitHub Actions to deploy to a
+Kubernetes cluster, there are no secrets being stored in GitHub Action's
+secret store. This prevents these powerful secrets from being exfiltrated from
+your CI/CD system and then used for malicious purposes.
 
 ### Rich auditing
 
