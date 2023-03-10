@@ -63,6 +63,6 @@ jobs:
         with:
           namespace: 'colormatic'
           manifests: |
-            kubernetes/deployment.yaml
-            kubernetes/service.yaml
+            kubernetes/99-deployment.yaml
+            kubernetes/99-service.yaml
           images: 'ghcr.io/strideynet/machineid-github-kubernetes-webinar/colormatic:${{ github.sha }}'

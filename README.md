@@ -8,6 +8,7 @@ Pre-reqs:
 Steps:
 - `tctl create -f teleport/role.yaml`
 - `tctl create -f teleport/github-bot-token.yaml`
+- `tctl bots add bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer`
 - `kubectl apply` `kubernetes/00-namespace.yaml`, `kubernetes/01-role.yaml`, `kubernetes/02-rolebinding.yaml`
 - Your Teleport and Kubernetes cluster now have the correct RBAC to allow your GitHub repo to deploy to the Kubernetes cluster through Teleport.
 - Trigger CI with color change.
