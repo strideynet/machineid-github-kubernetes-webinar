@@ -26,6 +26,9 @@ Steps:
 
 ### Rich auditing
 
+Teleport tracks audit events for the bot join, as well for each Kubernetes
+request made by the bot through Teleport.
+
 Bot join audit event in Teleport includes rich information about the CI workflow
 that join originated from:
 
