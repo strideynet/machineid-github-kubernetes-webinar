@@ -24,6 +24,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
+          builds-args: |
+            GITHUB_ACTIONS_RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           tags: |
             ghcr.io/${{ github.repository }}/colormatic:latest
             ghcr.io/${{ github.repository }}/colormatic:${{ github.sha }}

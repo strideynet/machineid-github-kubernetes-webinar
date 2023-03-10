@@ -1,5 +1,8 @@
 # machineid-github-kubernetes-webinar
 
+The accompanying demo repository for 
+https://teleport.registration.goldcast.io/events/cc92262f-da46-44c3-9c3a-c6278f40a043
+
 This README will be expanded.
 
 Pre-reqs:

@@ -22,4 +22,8 @@ EXPOSE 9090
 
 USER nonroot:nonroot
 
+# Embed the GitHub Actions Run URL so we can link to it in the application.
+ARG GITHUB_ACTIONS_RUN_URL
+ENV GITHUB_ACTIONS_RUN_URL=$GITHUB_ACTIONS_RUN_URL
+
 ENTRYPOINT ["/colormatic"]
