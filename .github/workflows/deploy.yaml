@@ -65,6 +65,7 @@ jobs:
       - uses: azure/k8s-deploy@v4
         with:
           namespace: 'colormatic'
+          annotate-namespace: false
           manifests: |
             kubernetes/99-deployment.yaml
             kubernetes/99-service.yaml
