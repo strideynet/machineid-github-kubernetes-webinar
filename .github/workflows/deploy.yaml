@@ -46,7 +46,7 @@ jobs:
         uses: teleport-actions/auth-k8s@v1
         with:
           # Specify the publically accessible address of your Teleport proxy.
-          proxy: tele.example.com:443
+          proxy: root.tele.ottr.sh:443
           # Specify the name of the join token for your bot.
           token: colormatic-deployer
           # Specify the length of time that the generated credentials should be
@@ -54,7 +54,7 @@ jobs:
           # Here we've limited it to 10m as this CI job doesn't need longer.
           certificate-ttl: 10m
           # Specify the name of the Kubernetes cluster you wish to access.
-          kubernetes-cluster: my-kubernetes-cluster
+          kubernetes-cluster: docker-desktop
           # Enable submission of anonymous usage telemetry to Teleport.
           # See https://goteleport.com/docs/machine-id/reference/telemetry/ for
           # more information.

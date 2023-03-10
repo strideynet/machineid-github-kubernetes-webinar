@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-      app.kubernetes.io/name: colormatic
+        app.kubernetes.io/name: colormatic
     spec:
       containers:
         - image: ghcr.io/strideynet/machineid-github-kubernetes-webinar/colormatic:latest
