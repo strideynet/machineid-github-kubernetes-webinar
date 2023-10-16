@@ -47,7 +47,7 @@ jobs:
       - name: Install Teleport
         uses: teleport-actions/setup@v1
         with:
-          version: 13.4.2
+          version: 13.4.3
       - name: Authenticate with Teleport
         # https://github.com/teleport-actions/auth-k8s
         uses: teleport-actions/auth-k8s@v1
