@@ -49,7 +49,7 @@ jobs:
         with:
           version: 13.4.2
       - name: Authenticate with Teleport
-        # https://github.com/teleport-actions/auth
+        # https://github.com/teleport-actions/auth-k8s
         uses: teleport-actions/auth-k8s@v1
         with:
           # Specify the publically accessible address of your Teleport proxy.
