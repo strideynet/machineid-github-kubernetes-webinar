@@ -9,6 +9,15 @@ import (
 	"os"
 )
 
+const (
+	colorBlue  = "SkyBlue"
+	colorGreen = "LightGreen"
+	colorPink  = "LightPink"
+
+	// Change me ! Commit, push, and see the magic happen!
+	configuredColor = colorPink
+)
+
 func main() {
 	if err := run(); err != nil {
 		log.Fatalln("Fatal error occurred in server setup: ", err)
@@ -37,15 +46,6 @@ func run() error {
 	log.Println("Listening on: ", addr)
 	return srv.ListenAndServe()
 }
-
-const (
-	colorBlue  = "SkyBlue"
-	colorGreen = "LightGreen"
-	colorPink  = "LightPink"
-
-	// Change me ! Commit, push, and see the magic happen!
-	configuredColor = colorBlue
-)
 
 func reqHandler(
 	tmpl *template.Template,
