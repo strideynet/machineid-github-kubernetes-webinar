@@ -3,8 +3,8 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: colormatic
   name: colormatic-deployer
+  namespace: colormatic
 rules:
   - apiGroups: ["apps"]
     resources: ["deployments"]

@@ -80,7 +80,7 @@ Steps:
   - `noah-demo.teleport.sh:443` with the publicly accessible address of your proxy.
 - `tctl create -f teleport/role.yaml` - creates the role your bot will use.
 - `tctl create -f teleport/github-bot-token.yaml` - defines the rules for which GitHub Action will be able to access the bot you create in the next step.
-- `tctl bots add bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer` - creates the Bot user that your GitHub Actions will authenticate as when connecting to Teleport.
+- `tctl bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer` - creates the Bot user that your GitHub Actions will authenticate as when connecting to Teleport.
 - `kubectl apply` `kubernetes/00-namespace.yaml`, `kubernetes/01-role.yaml`, `kubernetes/02-rolebinding.yaml` - create roles and role bindings in Kubernetes to assign that bot permissions to deploy to your cluster.
 - Your Teleport and Kubernetes cluster now have the correct RBAC to allow your GitHub repo to deploy to the Kubernetes cluster through Teleport.
 - Commit and push a change to `main.go` to trigger the CI.
