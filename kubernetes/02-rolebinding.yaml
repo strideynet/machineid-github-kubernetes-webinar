@@ -6,8 +6,8 @@ metadata:
 subjects:
   - kind: Group
     # Name field should match the group configured in the
-    # `allow.kubernetes_groups` of a role belonging to the user you wish to
-    # grant access to.
+    # `allow.kubernetes_groups` of a Teleport role belonging
+    # to the Teleport user you wish to grant the Teleport role to.
     name: colormatic-deployer
     apiGroup: rbac.authorization.k8s.io
 roleRef:

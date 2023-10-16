@@ -5,8 +5,8 @@ metadata:
   namespace: colormatic
 spec:
   ports:
-    - name: 9090-tcp
-      port: 9090
+    - name: http
+      port: 80
       protocol: TCP
       targetPort: 9090
   selector:

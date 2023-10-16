@@ -1,7 +1,7 @@
 kind: role
 metadata:
   name: colormatic-deployer
-version: v5
+version: v6
 spec:
   allow:
     kubernetes_labels:
@@ -14,4 +14,10 @@ spec:
       # a Kubernetes role to grant privileges to this Teleport role in the
       # Kubernetes cluster.
       - colormatic-deployer
+    kubernetes_resources:
+      # Access can be additionally restricted here to specific pods. This is
+      # layered on top of the RBAC inside Kubernetes.
+      - kind: pod
+        namespace: "*"
+        name: "*"
   deny: {}

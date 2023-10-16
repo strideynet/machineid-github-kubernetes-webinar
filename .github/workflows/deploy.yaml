@@ -5,6 +5,7 @@ on:
       - main
 
 jobs:
+  # Fairly standard build and push.
   build-and-push-docker:
     name: Build and push Docker image
     runs-on: ubuntu-latest
@@ -33,10 +34,12 @@ jobs:
     name: Deploy Kubernetes manifests using Teleport and Kubectl
     runs-on: ubuntu-latest
     needs: build-and-push-docker
-    environment: production
     permissions:
       id-token: write
       contents: read
+    # As our join token specifies `environment: production`, the job
+    # also requires this.
+    environment: production
     steps:
       - uses: actions/checkout@v3
       - name: Install Kubectl
@@ -44,20 +47,22 @@ jobs:
       - name: Install Teleport
         uses: teleport-actions/setup@v1
         with:
-          version: 12.1.0
-      - name: Authorize against Teleport
+          version: 13.4.2
+      - name: Authenticate with Teleport
+        # https://github.com/teleport-actions/auth
         uses: teleport-actions/auth-k8s@v1
         with:
           # Specify the publically accessible address of your Teleport proxy.
-          proxy: root.tele.ottr.sh:443
+          proxy: noah-demo.teleport.sh:443
           # Specify the name of the join token for your bot.
           token: colormatic-deployer
           # Specify the length of time that the generated credentials should be
           # valid for. This is optional and defaults to "1h".
           # Here we've limited it to 10m as this CI job doesn't need longer.
           certificate-ttl: 10m
-          # Specify the name of the Kubernetes cluster you wish to access.
-          kubernetes-cluster: docker-desktop
+          # Specify the name of the Kubernetes cluster the credentials will be
+          # generated for.
+          kubernetes-cluster: gcp
           # Enable submission of anonymous usage telemetry to Teleport.
           # See https://goteleport.com/docs/machine-id/reference/telemetry/ for
           # more information.

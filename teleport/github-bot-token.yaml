@@ -1,3 +1,4 @@
+# This token defines rules for the bots authentication
 kind: token
 version: v2
 metadata:
@@ -8,5 +9,11 @@ spec:
   bot_name: colormatic-deployer
   github:
     allow:
+        # Access will only be granted to a GitHub Actions workflow
+        # running in the `strideynet/machineid-github-kubernetes-webinar`
+        # repository.
       - repository: strideynet/machineid-github-kubernetes-webinar
+        # Access will only be granted to a GitHub Actions workflow
+        # step that is running against the `production` environment
+        # on GitHub.
         environment: production

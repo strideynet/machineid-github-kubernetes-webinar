@@ -1,3 +1,5 @@
+# This Kubernetes Role will be bound to the group configured in our Teleport Role.
+# It grants the privileges needed to deploy, and nothing more.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:

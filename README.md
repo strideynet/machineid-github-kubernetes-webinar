@@ -7,25 +7,6 @@ The demo shows a simple Go application that uses GitHub Actions and Teleport to
 build a docker image and deploy this to a Kubernetes cluster securely and
 without the use of secrets.
 
-Pre-requisites:
-- Kubernetes cluster connected to Teleport cluster.
-- Your cluster should support LoadBalancer type services (this is for the demo
-  to be internet accessible - you can omit this).
-
-Steps:
-- Fork this repo and replace:
-  - `strideynet/machineid-github-kubernetes-webinar` with your own GitHub repo's path.
-  - `docker-desktop` with the name of your Kubernetes cluster as configured in Teleport.
-  - `root.tele.ottr.sh:443` with the publicly accessible address of your proxy.
-- `tctl create -f teleport/role.yaml` - creates the role your bot will use.
-- `tctl create -f teleport/github-bot-token.yaml` - defines the rules for which GitHub Action will be able to access the bot you create in the next step.
-- `tctl bots add bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer` - creates the Bot user that your GitHub Actions will authenticate as when connecting to Teleport.
-- `kubectl apply` `kubernetes/00-namespace.yaml`, `kubernetes/01-role.yaml`, `kubernetes/02-rolebinding.yaml` - create roles and role bindings in Kubernetes to assign that bot permissions to deploy to your cluster.
-- Your Teleport and Kubernetes cluster now have the correct RBAC to allow your GitHub repo to deploy to the Kubernetes cluster through Teleport.
-- Commit and push a change to `main.go` to trigger the CI.
-- Check to see service deployed.
-- Take a peek at your Teleport audit log.
-
 ## Highlights
 
 ### No long-lived secrets
@@ -79,3 +60,29 @@ that join originated from:
   "uid": "e623f01a-94dd-4bd2-9914-19c0fbc672d6"
 }
 ```
+
+### Fine-grained access control
+
+Access is limited to only jobs within this repository attached to the
+environment `production`.
+
+## Trying it yourself
+
+Pre-requisites:
+- Kubernetes cluster connected to Teleport cluster.
+- Your cluster should support LoadBalancer type services (this is for the demo
+  to be internet accessible - you can omit this).
+
+Steps:
+- Fork this repo and replace:
+  - `strideynet/machineid-github-kubernetes-webinar` with your own GitHub repo's path.
+  - `gcp` with the name of your Kubernetes cluster as configured in Teleport.
+  - `noah-demo.teleport.sh:443` with the publicly accessible address of your proxy.
+- `tctl create -f teleport/role.yaml` - creates the role your bot will use.
+- `tctl create -f teleport/github-bot-token.yaml` - defines the rules for which GitHub Action will be able to access the bot you create in the next step.
+- `tctl bots add bots add colormatic-deployer --roles=colormatic-deployer --token=colormatic-deployer` - creates the Bot user that your GitHub Actions will authenticate as when connecting to Teleport.
+- `kubectl apply` `kubernetes/00-namespace.yaml`, `kubernetes/01-role.yaml`, `kubernetes/02-rolebinding.yaml` - create roles and role bindings in Kubernetes to assign that bot permissions to deploy to your cluster.
+- Your Teleport and Kubernetes cluster now have the correct RBAC to allow your GitHub repo to deploy to the Kubernetes cluster through Teleport.
+- Commit and push a change to `main.go` to trigger the CI.
+- Check to see service deployed.
+- Take a peek at your Teleport audit log.
