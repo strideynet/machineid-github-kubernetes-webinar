@@ -15,7 +15,7 @@ const (
 	colorPink  = "LightPink"
 
 	// Change me ! Commit, push, and see the magic happen!
-	configuredColor = colorGreen
+	configuredColor = colorBlue
 )
 
 func main() {
